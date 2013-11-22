@@ -150,22 +150,23 @@ class Calendar{
     	$next 				=	$this->adjustDate( $month + 1, $year );
 		$permalink			=	( get_option( 'permalink_structure' ) == '' ) ? '&amp;' : '?' ;
 		
-    	if ( $showYear == 1):
-				$prevMonth 	=	$permalink . "month=" . $prev[0] . "&year=" . $prev[1];
-				$nextMonth 	=	$permalink . "month=" . $next[0] . "&year=" . $next[1];
+    	if ( $showYear == 1 ):
+				$prevMonth 	=	"return getMonthHTML( " . $prev[0] . ", " . $prev[1] . " )";
+				$nextMonth 	=	"return getMonthHTML( " . $next[0] . ", " . $next[1] . " )";
     	else:
     	    $prevMonth 		=	"";
     	    $nextMonth 		=	"";
     	endif;
     	$header 			=	$monthName . ( ( $showYear > 0 ) ? " " . $year : "" );
-		$s .=  "<div class='addevent_box'>
+		$s .=  "<div class=\"ajax_loader\"></div>
+				<div class='addevent_box'>
 					<a href='" . $permalink . "method=addevent' class='addevent'><img src='" . $plugin_url . "/images/event_add.png' /><span>Add new event</span></a>
 				</div>";  
 		
     	$s .= "<table class=\"yearname\" width=\"100%\"><tbody><tr>";
-    	$s .= "<td align=\"left\" valign=\"middle\">" . (($prevMonth == "") ? "&nbsp;" : "<a href=\"$prevMonth\" class='commonTopLeftLinks'><img src=\"$plugin_url/images/left-arrow.png\" /></a>")  . "</td>\n";
+    	$s .= "<td align=\"left\" valign=\"middle\">" . (($prevMonth == "") ? "&nbsp;" : "<a href=\"javascript:;\" onclick=\"$prevMonth\" class='commonTopLeftLinks'><img src=\"$plugin_url/images/left-arrow.png\" /></a>")  . "</td>\n";
     	$s .= "<td align=\"center\" valign=\"middle\" class=\"calendarDate\" colspan=\"5\"><span class='green2' id=\"currmonthyear\">$header</span></td>\n"; 
-    	$s .= "<td align=\"right\" valign=\"middle\">" . (($nextMonth == "") ? "&nbsp;" : "<a href=\"$nextMonth\" class='commonTopRightLinks'><img src=\"$plugin_url/images/right-arrow.png\" /></a>")  . "</td>\n";
+    	$s .= "<td align=\"right\" valign=\"middle\">" . (($nextMonth == "") ? "&nbsp;" : "<a  href=\"javascript:;\" onclick=\"$nextMonth\" class='commonTopRightLinks'><img src=\"$plugin_url/images/right-arrow.png\" /></a>")  . "</td>\n";
 		$s .= "</tr></tbody></table>";
     	$s .= "<table class=\"eventcalender\" cellpadding=\"1\" cellspacing=\"1\" width=\"100%\" >\n";
     	$s .= "<thead><tr class=\"weektitle\">\n";
