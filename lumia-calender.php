@@ -38,7 +38,7 @@ if ( version_compare( PHP_VERSION, '5', '<' ) ) {
  
 require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
 require_once( 'lumia-calendar.class.php' );
-$plugin_url 			=	plugins_url() . '/wp-lumia-calender';
+$plugin_url 			=	plugins_url() . '/lumia-calender';
 
 class Lumia_Calender {
 	
@@ -81,7 +81,7 @@ class Lumia_Calender {
 		
 		global $wpdb;
 		
-		$pageArray		=	$wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE post_content = '[event_calender]' AND post_status = 'publish' AND post_type = 'page'" ) );
+		$pageArray		=	$wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE post_content = '[event_calender]' AND post_status = 'publish' AND post_type = 'page'" );
 		$portfolio		=	array(
 			'post_title'    => 'Event Calender',
 			'post_content'  => '[event_calender]',
@@ -224,7 +224,7 @@ class Lumia_Calender {
 		global $wpdb;
 
 		$query					= "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'portfolio'";
-		$posts					= $wpdb->get_results( $wpdb->prepare( $query ) );
+		$posts					= $wpdb->get_results( $query );
 
 		foreach( $posts as $post ) {
 			$post_id			= $post->ID;
@@ -240,7 +240,7 @@ class Lumia_Calender {
 
 		$post_id				= $post_id ? $post_id : 0;
 		$query					= "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'attachment' AND post_parent = {$post_id}";
-		$attachments			= $wpdb->get_results( $wpdb->prepare( $query ) );
+		$attachments			= $wpdb->get_results( $query  );
 
 		foreach( $attachments as $attachment ) {
 			// true is force delete
@@ -282,7 +282,7 @@ class Lumia_Calender {
 		
 		$tbl_booking						=	$table_prefix . "lumia_calender";
 		$selectSQL							=	sprintf( "SELECT * FROM {$tbl_booking} WHERE date >= '%s' AND date <= '%s'", $startDate, $endDate );
-		$executeSQL							=	$wpdb->get_results( $wpdb->prepare( $selectSQL ) ) ;
+		$executeSQL							=	$wpdb->get_results( $selectSQL ) ;
 
 		if( $executeSQL ):
 
@@ -310,7 +310,7 @@ class Lumia_Calender {
 		$tbl_booking						=	$table_prefix . "lumia_calender";
 		
 		$selectSQL							=	sprintf( "SELECT post_id FROM {$tbl_booking} WHERE date = '%s'", $date );
-		$executeSQL							=	$wpdb->get_results( $wpdb->prepare( $selectSQL ) ) ;
+		$executeSQL							=	$wpdb->get_results( $selectSQL ) ;
 		$permalink							=	( get_option( 'permalink_structure' ) == '' ) ? '&amp;' : '?' ;
 		$get_event_calender_link			=	self::get_event_calender_link() . $permalink;
 
@@ -338,7 +338,7 @@ class Lumia_Calender {
 	public function get_event_calender_link(){
 		
 		global $wpdb;
-		$pageArray							=	$wpdb->get_row( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_content = '[event_calender]' AND post_status = 'publish' AND post_type = 'page'" ) );
+		$pageArray							=	$wpdb->get_row( "SELECT ID FROM $wpdb->posts WHERE post_content = '[event_calender]' AND post_status = 'publish' AND post_type = 'page'" );
 		
 		return get_permalink( $pageArray->ID );
 	}
@@ -347,7 +347,7 @@ class Lumia_Calender {
 		
 		global $wpdb;
 		
-		$eventObj						=	$wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE post_name = '{$event_slug}' AND post_status = 'publish' AND post_type = 'lumia_event'" ) );
+		$eventObj						=	$wpdb->get_row( "SELECT * FROM $wpdb->posts WHERE post_name = '{$event_slug}' AND post_status = 'publish' AND post_type = 'lumia_event'" );
 		
 			
 		$event_data						=	get_post_meta( $eventObj->ID, '_wlec_events', true );
@@ -455,7 +455,7 @@ class Lumia_Calender {
 					$month				=	$event_start_month;
 					$date				=	$year . '-' . $month . '-' . $i;
 					$querySQL			=	sprintf( "SELECT * FROM {$tbl_booking} WHERE post_id = %d AND date = '%s'", $post_id, $date );
-					$selectSQL			=	$wpdb->get_row( $wpdb->prepare( $querySQL ) );
+					$selectSQL			=	$wpdb->get_row( $querySQL );
 					
 					if(  count( $selectSQL ) < 0 || count( $selectSQL ) == 0  ){
 						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s'", $post_id, $date ) );
@@ -469,7 +469,7 @@ class Lumia_Calender {
 					$kmonth				=	$event_end_month;
 					$kdate				=	$kyear . '-' . $kmonth . '-' . $k;
 					$querySQL			=	sprintf( "SELECT * FROM {$tbl_booking} WHERE post_id = %d AND date = '%s'", $post_id, $kdate );
-					$selectSQL			=	$wpdb->get_row( $wpdb->prepare( $querySQL ) );
+					$selectSQL			=	$wpdb->get_row( $querySQL );
 					
 					if(  count( $selectSQL ) < 0 || count( $selectSQL ) == 0  ){
 						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s'", $post_id, $kdate ) );
@@ -484,7 +484,7 @@ class Lumia_Calender {
 					$month				=	( $event_start_month == $event_end_month ) 			?	$event_start_month		:	$event_end_month;
 					$date				=	$year . '-' . $month . '-' . $i;
 					$querySQL			=	sprintf( "SELECT * FROM {$tbl_booking} WHERE post_id = %d AND date = '%s'", $post_id, $date );
-					$selectSQL			=	$wpdb->get_row( $wpdb->prepare( $querySQL ) );
+					$selectSQL			=	$wpdb->get_row( $querySQL );
 					
 					if(  count( $selectSQL ) < 0 || count( $selectSQL ) == 0  ){
 						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s'", $post_id, $date ) );
