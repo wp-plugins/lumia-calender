@@ -1,6 +1,7 @@
 <?php
 require_once( 'lumia-calender.php' );
 $LumiaCalender		=	new Lumia_Calender;
+
 class Calendar{
     /*Constructor for the Calendar class */
     function Calendar(){
@@ -149,7 +150,7 @@ class Calendar{
     	$prev 				=	$this->adjustDate( $month - 1, $year );
     	$next 				=	$this->adjustDate( $month + 1, $year );
 		$permalink			=	( get_option( 'permalink_structure' ) == '' ) ? '&amp;' : '?' ;
-		
+		$calender_url		=	$LumiaCalender->get_event_calender_link() . $permalink;
     	if ( $showYear == 1 ):
 				$prevMonth 	=	"return getMonthHTML( " . $prev[0] . ", " . $prev[1] . " )";
 				$nextMonth 	=	"return getMonthHTML( " . $next[0] . ", " . $next[1] . " )";
@@ -160,7 +161,7 @@ class Calendar{
     	$header 			=	$monthName . ( ( $showYear > 0 ) ? " " . $year : "" );
 		$s .=  "<div class=\"ajax_loader\"></div>
 				<div class='addevent_box'>
-					<a href='" . $permalink . "method=addevent' class='addevent'><img src='" . $plugin_url . "/images/event_add.png' /><span>Add new event</span></a>
+					<a href='" . $calender_url . "method=addevent' class='addevent'><img src='" . $plugin_url . "/images/event_add.png' /><span>Add new event</span></a>
 				</div>";  
 		
     	$s .= "<table class=\"yearname\" width=\"100%\"><tbody><tr>";
