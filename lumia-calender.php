@@ -636,7 +636,7 @@ function lumia_event_columns( $column, $post_id ) {
 	}
 }
 
-global $table_prefix;
+global $table_prefix, $wpdb;
 $lumia_calender 		=	$table_prefix . "lumia_calender";
 
 if( $wpdb->get_var( "show tables like '$lumia_calender'" ) != $lumia_calender ) {
