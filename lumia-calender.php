@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP Lumia Calender
-Plugin URI: http://offshorent.com/
+Plugin URI: http://weblumia.com/
 Description: Lumia Calendar is an easy-to-use calendar plug-in to manage all your events with many options and a flexible usage..
 Version: 2.1.4
-Author: Jinesh.P.V, Offshorent Software Pvt Ltd.
-Author URI: http://www.offshorent.com/
+Author: Jinesh.P.V, Weblumia Software Pvt Ltd.
+Author URI: http://www.weblumia.com/
 */
 /**
 	Copyright 2013 Jinesh.P.V (email: jinuvijay5@gmail.com)
