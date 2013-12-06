@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP Lumia Calender
-Plugin URI: http://offshorent.com/
+Plugin URI: http://weblumia.com/
 Description: Lumia Calendar is an easy-to-use calendar plug-in to manage all your events with many options and a flexible usage..
-Version: 2.1.4
-Author: Jinesh.P.V, Offshorent Software Pvt Ltd.
-Author URI: http://www.offshorent.com/
+Version: 2.1.5
+Author: Jinesh.P.V, Weblumia Software Pvt Ltd.
+Author URI: http://weblumia.com/
 */
 /**
 	Copyright 2013 Jinesh.P.V (email: jinuvijay5@gmail.com)
@@ -50,15 +50,19 @@ class Lumia_Calender {
 		register_deactivation_hook( __FILE__, array( &$this, 'lumia_deactivation' ) );
 		register_uninstall_hook( __FILE__, array( 'lumia_portfolio', 'lumia_uninstall' ) );
 		add_action( 'admin_init', array( &$this, 'lumia_admin_scripts' ) );
-		add_shortcode( 'event_calender', array( &$this, 'show_event_calender' ) );
+		//add_action( 'admin_footer', array( &$this, 'admin_self_functions' ) );
 		add_action( 'wp_enqueue_scripts', array( &$this, 'load_event_colorbox_js' ), 20 );
 		add_action( 'wp_footer', array( &$this, 'load_event_colorbox_scripts' ), 20 );
 		add_action( 'wp_enqueue_scripts', array( &$this, 'lumia_admin_scripts' ) );
 		add_action( 'wp_ajax_nopriv_getAjaxMonthView', array( &$this, 'getAjaxMonthView' ) );
 		add_action( 'wp_ajax_getAjaxMonthView', array( &$this, 'getAjaxMonthView' ) );
+		add_action( 'trash_lumia_event', array( &$this, 'tash_lumia_event_dates' ) );
+		add_action( 'untrash_post', array( &$this, 'untash_lumia_event_dates' ) );
+		add_action( 'delete_post', array( &$this, 'delete_lumia_event_dates' ) );
+		add_shortcode( 'event_calender', array( &$this, 'show_event_calender' ) );
 	}
 	
-	/* init function for lumia portfolios*/
+	/* init function for lumia calender*/
 	
 	public function init(){
 		self::lumia_admin_stylesheet();
@@ -96,6 +100,40 @@ class Lumia_Calender {
 		}
 	}
 	
+	function tash_lumia_event_dates( $post_id ){
+		
+		global $wpdb, $table_prefix;
+		$tbl_booking			=	$table_prefix . "lumia_calender";
+		$query					=	"SELECT * FROM {$tbl_booking} WHERE post_id = {$post_id}";
+		$posts					=	$wpdb->get_results( $query );
+		if( !empty( $posts ) ){
+			$wpdb->query( $wpdb->prepare( "UPDATE {$tbl_booking} SET status = '0' WHERE post_id = %d", $post_id ) );;
+		}
+	}
+	
+	function untash_lumia_event_dates( $post_id ){
+		
+		global $wpdb, $table_prefix;
+		$tbl_booking			=	$table_prefix . "lumia_calender";
+		$query					=	"SELECT * FROM {$tbl_booking} WHERE post_id = {$post_id}";
+		$posts					=	$wpdb->get_results( $query );
+		if( !empty( $posts ) ){
+			$wpdb->query( $wpdb->prepare( "UPDATE {$tbl_booking} SET status = '1' WHERE post_id = %d", $post_id ) );;
+		}
+	}
+	
+	function delete_lumia_event_dates( $post_id ){
+		
+		global $wpdb, $table_prefix;
+		$tbl_booking			=	$table_prefix . "lumia_calender";
+		$query					=	"SELECT * FROM {$tbl_booking} WHERE post_id = {$post_id}";
+		$posts					=	$wpdb->get_results( $query );
+		if( !empty( $posts ) ){
+			$wpdb->query( $wpdb->prepare( "DELETE FROM {$tbl_booking} WHERE post_id = %d", $post_id ) );;
+		}
+	}
+	
+	
 	public function lumia_admin_stylesheet() {
 		
 		$calenderstylesheetURL 			= 	plugins_url( 'style/style.css', __FILE__ );
@@ -127,11 +165,10 @@ class Lumia_Calender {
 	}
 	
 	public function lumia_admin_scripts() {
-	
+		
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'datepicker', plugins_url( '/js/datepicker.js', __FILE__ ), '1.4.2' );
 		wp_enqueue_script( 'core', plugins_url( '/js/core.js', __FILE__ ), '1.0.2' );
-		
 	}
 	
 	public function load_event_colorbox_js(){
@@ -142,6 +179,7 @@ class Lumia_Calender {
 	}
 	
 	public function load_event_colorbox_scripts(){
+		
 		if( !is_admin() ){
 			?>
 			<script type="text/javascript">
@@ -176,7 +214,7 @@ class Lumia_Calender {
 					});  
 				}
 			</script>
-		<?php
+		<?php 
 		}
     }
 	
@@ -213,21 +251,26 @@ class Lumia_Calender {
 
 		global $wpdb;
 
-		self::lumia_delete_portfolios();
+		self::lumia_delete_calender_dates();
 
 		$wpdb->query( "OPTIMIZE TABLE `" . $wpdb->options . "`" );
 		$wpdb->query( "OPTIMIZE TABLE `" . $wpdb->postmeta . "`" );
 		$wpdb->query( "OPTIMIZE TABLE `" . $wpdb->posts . "`" );
 	}
 	
-	public static function lumia_delete_portfolios() {
+	public static function lumia_delete_calender_dates() {
+		
 		global $wpdb;
-
-		$query					= "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'portfolio'";
-		$posts					= $wpdb->get_results( $query );
-
+		
+		$tbl_booking			=	$table_prefix . "lumia_calender";
+		$query					=	"SELECT ID FROM {$wpdb->posts} WHERE post_type = 'lumia_event'";
+		$posts					=	$wpdb->get_results( $query );
+		
+		$del_query				=	"DELETE FROM {$tbl_booking}";
+		$posts					=	$wpdb->query( $wpdb->prepare( $del_query ) );
+		
 		foreach( $posts as $post ) {
-			$post_id			= $post->ID;
+			$post_id			=	$post->ID;
 			self::lumia_delete_attachments( $post_id );
 
 			wp_delete_post( $post_id, true );
@@ -238,9 +281,9 @@ class Lumia_Calender {
 	public static function lumia_delete_attachments( $post_id = false ) {
 		global $wpdb;
 
-		$post_id				= $post_id ? $post_id : 0;
-		$query					= "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'attachment' AND post_parent = {$post_id}";
-		$attachments			= $wpdb->get_results( $query  );
+		$post_id				=	$post_id ? $post_id : 0;
+		$query					=	"SELECT ID FROM {$wpdb->posts} WHERE post_type = 'attachment' AND post_parent = {$post_id}";
+		$attachments			=	$wpdb->get_results( $query  );
 
 		foreach( $attachments as $attachment ) {
 			// true is force delete
@@ -281,7 +324,7 @@ class Lumia_Calender {
 		$date								=	'';
 		
 		$tbl_booking						=	$table_prefix . "lumia_calender";
-		$selectSQL							=	sprintf( "SELECT * FROM {$tbl_booking} WHERE date >= '%s' AND date <= '%s'", $startDate, $endDate );
+		$selectSQL							=	sprintf( "SELECT * FROM {$tbl_booking} WHERE date >= '%s' AND date <= '%s' AND status = '1'", $startDate, $endDate );
 		$executeSQL							=	$wpdb->get_results( $selectSQL ) ;
 
 		if( $executeSQL ):
@@ -309,7 +352,7 @@ class Lumia_Calender {
 		$date								=	$year . '-' . $month . '-' . $day;
 		$tbl_booking						=	$table_prefix . "lumia_calender";
 		
-		$selectSQL							=	sprintf( "SELECT post_id FROM {$tbl_booking} WHERE date = '%s'", $date );
+		$selectSQL							=	sprintf( "SELECT post_id FROM {$tbl_booking} WHERE date = '%s' AND status = '1'", $date );
 		$executeSQL							=	$wpdb->get_results( $selectSQL ) ;
 		$permalink							=	( get_option( 'permalink_structure' ) == '' ) ? '&amp;' : '?' ;
 		$get_event_calender_link			=	self::get_event_calender_link() . $permalink;
@@ -347,24 +390,24 @@ class Lumia_Calender {
 		
 		global $wpdb;
 		
-		$eventObj						=	$wpdb->get_row( "SELECT * FROM $wpdb->posts WHERE post_name = '{$event_slug}' AND post_status = 'publish' AND post_type = 'lumia_event'" );
+		$eventObj							=	$wpdb->get_row( "SELECT * FROM $wpdb->posts WHERE post_name = '{$event_slug}' AND post_status = 'publish' AND post_type = 'lumia_event'" );
 		
 			
-		$event_data						=	get_post_meta( $eventObj->ID, '_wlec_events', true );
-		$location						=	( empty( $event_data['location'] ) )               	?	''	:	$event_data['location'];
-		$from							=	( empty( $event_data['from'] ) )    				?	''	:	$event_data['from'];
-		$to								=	( empty( $event_data['to'] ) )    					?	''	:	$event_data['to'];
+		$event_data							=	get_post_meta( $eventObj->ID, '_wlec_events', true );
+		$location							=	( empty( $event_data['location'] ) )               	?	''	:	$event_data['location'];
+		$from								=	( empty( $event_data['from'] ) )    				?	''	:	$event_data['from'];
+		$to									=	( empty( $event_data['to'] ) )    					?	''	:	$event_data['to'];
 	
-		$html							=	'<h1 class="page-title">' . get_the_title( $eventObj->ID ) . '</h1>
-											<p>';
+		$html								=	'<h1 class="page-title">' . get_the_title( $eventObj->ID ) . '</h1>
+												<p>';
 		if( $location ){
-			$html						.=		'<span><label>Location : </label>' . $location . '</span>';
+			$html							.=		'<span><label>Location : </label>' . $location . '</span>';
 		}
 		if( $from && $to ){
-			$html						.=		'<span><label>Date : </label>' . $from . ' - ' . $to . '</span>';
+			$html							.=		'<span><label>Date : </label>' . $from . ' - ' . $to . '</span>';
 		}
-		$html							.=		'<span><label>Posted By : </label>' . get_the_author_meta( 'display_name', $eventObj->post_author ) . '</span>
-											</p>
+		$html								.=		'<span><label>Posted By : </label>' . get_the_author_meta( 'display_name', $eventObj->post_author ) . '</span>
+												</p>
 											' . apply_filters( 'the_content', $eventObj->post_content );
 		
 		return $html;
@@ -458,9 +501,9 @@ class Lumia_Calender {
 					$selectSQL			=	$wpdb->get_row( $querySQL );
 					
 					if(  count( $selectSQL ) < 0 || count( $selectSQL ) == 0  ){
-						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s'", $post_id, $date ) );
+						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s', status = '1'", $post_id, $date ) );
 					} else {
-						$wpdb->query( $wpdb->prepare( "UPDFATE {$tbl_booking} SET date = '%s' WHERE post_id = %d", $date, $post_id ) );
+						$wpdb->query( $wpdb->prepare( "UPDATE {$tbl_booking} SET date = '%s, status = '1' WHERE post_id = %d", $date, $post_id ) );
 					}
 				}
 				for( $k = 1; $k <= $event_end_day; $k++ ){
@@ -472,9 +515,9 @@ class Lumia_Calender {
 					$selectSQL			=	$wpdb->get_row( $querySQL );
 					
 					if(  count( $selectSQL ) < 0 || count( $selectSQL ) == 0  ){
-						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s'", $post_id, $kdate ) );
+						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s', status = '1'", $post_id, $kdate ) );
 					} else {
-						$wpdb->query( $wpdb->prepare( "UPDFATE {$tbl_booking} SET date = '%s' WHERE post_id = %d", $kdate, $post_id ) );
+						$wpdb->query( $wpdb->prepare( "UPDATE {$tbl_booking} SET date = '%s, status = '1' WHERE post_id = %d", $kdate, $post_id ) );
 					}
 				}
 			} else {
@@ -487,9 +530,9 @@ class Lumia_Calender {
 					$selectSQL			=	$wpdb->get_row( $querySQL );
 					
 					if(  count( $selectSQL ) < 0 || count( $selectSQL ) == 0  ){
-						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s'", $post_id, $date ) );
+						$wpdb->query( $wpdb->prepare( "INSERT INTO {$tbl_booking} SET post_id = %d, date = '%s', status = '1'", $post_id, $date ) );
 					} else {
-						$wpdb->query( $wpdb->prepare( "UPDFATE {$tbl_booking} SET date = '%s' WHERE post_id = %d", $date, $post_id ) );
+						$wpdb->query( $wpdb->prepare( "UPDATE {$tbl_booking} SET date = '%s', status = '1' WHERE post_id = %d", $date, $post_id ) );
 					}
 				}
 			}
@@ -652,6 +695,7 @@ if( $wpdb->get_var( "show tables like '$lumia_calender'" ) != $lumia_calender ) 
 							id INT( 15 ) NOT NULL AUTO_INCREMENT ,
 							post_id INT( 15 ) NOT NULL,
 							date DATE NOT NULL,
+							status tinyint( 1 ) NOT NULL,
 							PRIMARY KEY ( id )
 							) ".$charset_collate.";";
 	
