@@ -3,7 +3,7 @@
 Plugin Name: WP Lumia Calender
 Plugin URI: http://weblumia.com/
 Description: Lumia Calendar is an easy-to-use calendar plug-in to manage all your events with many options and a flexible usage..
-Version: 2.1.5
+Version: 2.1.6
 Author: Jinesh.P.V, Weblumia Software Pvt Ltd.
 Author URI: http://weblumia.com/
 */
