@@ -1,0 +1,205 @@
+table.eventcalender tr td.ecday, table.eventcalender tr td.eventdaytable.eventcalender tr td.today{
+	border-top:1px solid #CCCCCC;
+	border-left:1px solid #CCCCCC;
+	color: #7A7A7A;
+	font: 14px Arial, Helvetica, sans-serif;
+    padding: 10px 6px;
+	text-align: right;
+	vertical-align: top;
+	height:80px;
+}
+table.eventcalender tr td.ecday.cc-last{
+	border-right:1px solid #CCCCCC;
+}
+table.eventcalender tr td.eventday{
+	background:#185d19;
+	text-align:right;
+	padding:10px 6px;
+}
+table.eventcalender tr td.today {
+	background-color: #FFFFCC;
+	border:1px solid #CCCCCC;
+	padding: 10px 6px;
+	text-align: right;
+	font: 14px Arial, Helvetica, sans-serif;
+	color: #7A7A7A;
+}
+table.eventcalender tr td.sheduleday, table.eventcalender tr td.saturday{
+	padding: 10px 6px;
+	text-align: right;
+	height:80px;
+}
+table.eventcalender tr th.daytitle {
+	font: normal 15px Arial, Helvetica, sans-serif;
+    padding: 10px 6px;
+	border:1px solid #CCCCCC;
+}
+table.eventcalender tr td.daytitle strong{
+	font-size:14px;
+}
+table.eventcalender tr td.ecday a span {
+	font-weight:normal;
+	color:#999;
+	text-decoration:none;
+}
+table.eventcalender tr td.eventday a span {
+	color:#fff;
+}
+table.eventcalender tr td.eventday a:hover {
+	text-decoration:none;
+}
+table.eventcalender tr td.eventday a:hover span{
+	color:#999;
+}
+table.eventcalender tr td.today a span, table.eventcalender tr td.sheduleday a span {
+	color:#FFF;
+}
+table.eventcalender tr td.ecday a:hover, table.eventcalender tr td.today a:hover, table.eventcalender tr td.sheduleday a:hover {
+	text-decoration:none;
+}
+table.eventcalender tr td a.status {
+	display: inline;
+	margin-right: 20px;
+}
+table.eventcalender tr td.ecday a, table.eventcalender tr td.today a{
+	text-decoration:none;
+}
+table.eventcalender tr.weektitle th.daytitle.ec-first{
+	border-radius: 5px 0 0 0;
+}
+table.eventcalender tr.weektitle th.daytitle.ec-last {
+	border-radius:0 5px 0 0;
+}
+table.eventcalender tr.cc-last td.fc-first {
+	border-radius:0 0 0 5px;
+}
+table.eventcalender tr.cc-last td.fc-last {
+	border-radius:0 0 5px 0;
+}
+table.yearname{
+	margin-bottom:10px;
+}
+table.yearname tr td span#currmonthyear{
+	font: 24px Arial, Helvetica, sans-serif;
+	color: #484747;
+	vertical-align: bottom;
+	text-align: center;
+	display:block;
+}
+table.yearname tr td img{
+	vertical-align:bottom;
+}
+table.eventcalender tr td.eventday a{
+}
+.event_box h3{
+	font: 18px Arial, Helvetica, sans-serif;
+	color: #BD270F;
+}
+.event_box ul li{
+	line-height:none;
+	list-style: square outside none;
+    margin-left: 20px;
+}
+.event_box ul li a{
+    color: #252526;
+    font: 14px/30px Helvetica, sans-serif;
+    margin: 0 0 0 5px;
+    padding: 0;
+    text-decoration: none;
+}
+.event_box ul li a:hover{
+	color:#900;
+}
+table.eventcalender tr, table.eventcalender tr td{
+	position:relative;
+}
+table.eventcalender tr td a.addevent{
+	float:left;
+}
+table.eventcalender tr td a.addevent img{
+	margin:65px -90px 0 0;
+	
+}
+.addevent_box{
+	overflow:hidden;
+	margin:10px 0;
+}
+.addevent_box a.addevent {
+	float:right;
+	font: 14px/21px Helvetica, sans-serif;
+	background:#BD270F;
+	padding:3px 10px;
+	color:#fff;
+	text-decoration: none;
+}
+.addevent_box a.addevent:hover{
+	text-decoration:none;
+	background: #666666;
+}
+.addevent_box a.addevent span{
+}
+.addevent_box a.addevent img{
+	margin:2px 5px 0 0;
+}
+#addevent, .event_box, .form_wrapper{
+	position:relative;
+}
+.form_wrapper{
+	margin-top:15px;
+}
+.form_wrapper p{
+	margin-bottom:10px;
+	color: #666666;
+}
+.form_wrapper label{
+	float:left;
+	width:120px;
+	color: #666666;
+}
+.form_wrapper input[type="text"]{
+	width:78%;
+	padding:5px 15px;
+	font: 14px Helvetica, sans-serif;
+}
+.form_wrapper input[type="text"].small{
+	width:206px;
+	margin:0 20px;
+}
+.wp-editor-container { 
+    font-family: Arial, Helvetica, sans-serif !important; 
+	height:400px !important;
+}	
+.wp_themeSkin iframe{
+	height: 348px !important;
+}
+.wp-editor-container textarea.wp-editor-area{
+	resize:none;
+}
+.form_wrapper input[type="submit"]{
+    background: none repeat scroll 0 0 #303130;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 31px;
+    padding: 5px 8px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+	margin-top:20px;
+}
+table.yearname tr td a.commonTopRightLinks img{
+	float:right;
+}
+.error{
+	color:#FF0000;
+}
+.lumia_event_wrapper{
+	position:relative;
+}
+.ajax_loader{
+	display:none;
+	background:url(../images/spinnerlarge.gif) no-repeat center center;
+	width:100%;
+	height:100%;
+	position:absolute;
+}
