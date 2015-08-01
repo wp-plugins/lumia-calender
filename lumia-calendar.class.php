@@ -149,8 +149,7 @@ class Calendar{
     	$monthName 			=	$this->monthNames[$month - 1];
     	$prev 				=	$this->adjustDate( $month - 1, $year );
     	$next 				=	$this->adjustDate( $month + 1, $year );
-		$permalink			=	( get_option( 'permalink_structure' ) == '' ) ? '&amp;' : '?' ;
-		$calender_url		=	$LumiaCalender->get_event_calender_link() . $permalink;
+		
     	if ( $showYear == 1 ):
 				$prevMonth 	=	"return getMonthHTML( " . $prev[0] . ", " . $prev[1] . " )";
 				$nextMonth 	=	"return getMonthHTML( " . $next[0] . ", " . $next[1] . " )";
@@ -159,15 +158,11 @@ class Calendar{
     	    $nextMonth 		=	"";
     	endif;
     	$header 			=	$monthName . ( ( $showYear > 0 ) ? " " . $year : "" );
-		$s .=  "<div class=\"ajax_loader\"></div>
-				<div class='addevent_box'>
-					<a href='" . $calender_url . "method=addevent' class='addevent'><img src='" . $plugin_url . "/images/event_add.png' /><span>Add new event</span></a>
-				</div>";  
-		
+		$s .=  "<div class=\"ajax_loader\"></div>";  
     	$s .= "<table class=\"yearname\" width=\"100%\"><tbody><tr>";
-    	$s .= "<td align=\"left\" valign=\"middle\">" . (($prevMonth == "") ? "&nbsp;" : "<a href=\"javascript:;\" onclick=\"$prevMonth\" class='commonTopLeftLinks'><img src=\"$plugin_url/images/left-arrow.png\" /></a>")  . "</td>\n";
-    	$s .= "<td align=\"center\" valign=\"middle\" class=\"calendarDate\" colspan=\"5\"><span class='green2' id=\"currmonthyear\">$header</span></td>\n"; 
-    	$s .= "<td align=\"right\" valign=\"middle\">" . (($nextMonth == "") ? "&nbsp;" : "<a  href=\"javascript:;\" onclick=\"$nextMonth\" class='commonTopRightLinks'><img src=\"$plugin_url/images/right-arrow.png\" /></a>")  . "</td>\n";
+    	$s .= "<td colspan=\"3\" align=\"left\" valign=\"middle\">" . (($prevMonth == "") ? "&nbsp;" : "<a href=\"javascript:;\" onclick=\"$prevMonth\" class='month_name prev'><img src=\"$plugin_url/images/left-arrow.png\" /></a>")  . "\n";
+    	$s .= "<span class='green2' id=\"currmonthyear\">$header</span>\n"; 
+    	$s .= (($nextMonth == "") ? "&nbsp;" : "<a  href=\"javascript:;\" onclick=\"$nextMonth\" class='month_name next'><img src=\"$plugin_url/images/right-arrow.png\" /></a>")  . "</td>\n";
 		$s .= "</tr></tbody></table>";
     	$s .= "<table class=\"eventcalender\" cellpadding=\"1\" cellspacing=\"1\" width=\"100%\" >\n";
     	$s .= "<thead><tr class=\"weektitle\">\n";
@@ -253,7 +248,7 @@ class Calendar{
 				
 				if ( @in_array( $d, $dates ) && $dates != '' && $d != 0 ):
 					$s .= "<div style='display:none'>
-								<div id='event_content_" . $d ."' style='padding:10px; background:#fff;'>
+								<div id='event_content_" . $d ."' class='event_content'>
 									<div class=\"event_box\">
 										<h3>Events on " . date( 'F j, Y', strtotime( $year . '-' . $month . '-' . $d ) ) . "</h3>
 										<ul>" . $LumiaCalender->getProjectIds( $d, $month, $year ) . "</ul>
@@ -334,23 +329,7 @@ class Calendar{
 				else:
 					$className2 = 'blue';
 				endif;
-				/*if( $aparttype != '' ):
-					$startDate		=	$year . "-" . $month . "-" . "01";
-					$endDate		=	$year . "-" . $month . "-" . "31";
-					//$dates			=	$ObjBooking->getDatesFromType( $aparttype , $startDate, $endDate );
-				endif;
-				
-				if( $dates != '' ):
-					$dates			=	explode( ",", $dates );
-				endif;
-        	    if ( @in_array( $d, $dates ) && $dates != '' && $d != 0 ):
-					$class 	=	"sheduleday"; 
-					$click	=	 "";
-				else:
-					$class 	=	"sheday";
-					$status	=	'';
-					$click	=	 "onClick=\"return setAvailableDate( '" . $d . "/" . $month . "/" . $year . "' );\"";
-				endif;*/
+
     	        $s .= "<td class=\"$class\" align=\"center\" valign=\"middle\">" . $status . "<a href=\"javascript:;\" $click><span class='" . $className2 . "'>";
     	        if ( $d > 0 && $d <= $daysInMonth ):
 					$sel_day  = $_REQUEST['day'];
@@ -448,7 +427,7 @@ class Calendar{
         The labels to display for the days of the week. The first entry in this array
         represents Sunday.
     */
-	var $dayNames 		=	array( "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" );
+	var $dayNames 		=	array( "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" );
 	var $dayWijtNames 	=	array( "SU", "MO", "TU", "WE", "TH", "FR", "SA" );
     /*
         The labels to display for the months of the year. The first entry in this array

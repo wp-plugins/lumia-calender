@@ -3,16 +3,16 @@ Contributors: pv.jinesh
 Donate link: 
 Tags: organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar
 Requires at least: 3.0
-Tested up to: 4.1
-Stable tag: 2.1.7
+Tested up to: 4.2.3
+Stable tag: 2.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The Events Calendar is a carefully crafted, extensible plugin that lets you easily share your events
+The Events Calendar is a carefully crafted, responsible, attracted, extensible plugin that lets you easily share your events
 
 == Description ==
 
-The Events Calendar is a carefully crafted, extensible plugin that lets you easily share your events
+The Events Calendar is a carefully crafted, responsible, attracted, extensible plugin that lets you easily share your events
 
 = Plugin Features =
 
@@ -55,16 +55,24 @@ An answer to that question.
 == Screenshots ==
 
 1. Calender admin interface
-2. Display calendar month view 
-3. Add new event  interface 
-4. Display event list 
+2. Add new event from admin 
+3. Event Calender display
+4. Single event display
+5. Event list by dates 
+6. Add new event from front end  
 
 == Changelog ==
-
+* Added Responsive layout
+* Style issues fixed
+* Added attractive theme for calender and single views
+* Improve coding standard
 
 
 == Upgrade notice ==
-1. Error removed
+1. Added Responsive layout
+2. Style issues fixed
+3. Added attractive theme for calender and single views
+4. Improve coding standard
 
 
 == Arbitrary section 1 ==
