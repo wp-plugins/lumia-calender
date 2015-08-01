@@ -1,0 +1,512 @@
+*::before, *::after {
+    box-sizing: border-box;
+}
+table.eventcalender tr td.ecday, table.eventcalender tr td.eventdaytable.eventcalender tr td.today{
+	border:2px solid #000;
+	color: #000;
+	font:600 50px/135px "Open Sans",Helvetica,Arial,sans-serif;
+	text-align: center;
+	vertical-align: middle;
+}
+table.eventcalender tr td.ecday.cc-last{
+	border-right:2px solid #000;
+}
+table.eventcalender tr td.eventday{
+	border:2px solid #000;	
+	font:600 50px/135px "Open Sans",Helvetica,Arial,sans-serif;
+	text-align: center;
+	vertical-align: middle;
+}
+table.eventcalender tr td.eventday a {
+	color: #BB1114;
+	text-decoration:none;
+	display:block;
+	background: #fff4f4 url(../images/event_day.png) no-repeat left top;
+}
+table.eventcalender tr td.today {
+	border:2px solid #000;	
+	font:600 50px/135px "Open Sans",Helvetica,Arial,sans-serif;
+	text-align: center;
+	vertical-align: middle;
+	color: #000;
+}
+table.eventcalender tr td.today span {
+	display:block;
+	background: #f1f1f1 url(../images/today.png) no-repeat left top;
+	color: #666;
+}
+table.eventcalender tr td.sheduleday, table.eventcalender tr td.saturday{
+	padding: 10px 6px;
+	text-align: right;
+	height:80px;
+}
+table.eventcalender tr th.daytitle {
+	font: 600 26px/26px "Open Sans",Helvetica,Arial,sans-serif;
+    padding: 10px 6px;
+	border:2px solid #000;
+	text-transform:uppercase;
+	text-align:center;
+	color:#fff;
+}
+table.eventcalender tr td.daytitle strong{
+	font-size:14px;
+}
+table.eventcalender tr td.ecday a span {
+	font-weight:normal;
+	color:#999;
+	text-decoration:none;
+}
+table.eventcalender tr td.eventday a:hover {
+	text-decoration:none;
+}
+table.eventcalender tr td.eventday a:hover span{
+	color:#999;
+}
+table.eventcalender tr td.today a span, table.eventcalender tr td.sheduleday a span {
+	color:#FFF;
+}
+table.eventcalender tr td.ecday a:hover, table.eventcalender tr td.today a:hover, table.eventcalender tr td.sheduleday a:hover {
+	text-decoration:none;
+}
+table.eventcalender tr td a.status {
+	display: inline;
+	margin-right: 20px;
+}
+table.eventcalender tr td.ecday a, table.eventcalender tr td.today a{
+	text-decoration:none;
+}
+table.yearname tr td span#currmonthyear{
+	font:500 60px/127px "Open Sans",Helvetica,Arial,sans-serif;
+	color: #fff;
+	text-align: center;
+	display:block;
+	text-transform:uppercase;
+	vertical-align: middle;
+	width: 82%;
+	float: left;
+}
+table.yearname tr td img{
+	vertical-align:middle;
+}
+.event_content {
+	margin:20px;
+}
+.event_box ul li{
+	line-height:none;
+	list-style: none;
+    margin-left: 0px;
+}
+.event_box ul li a{
+    color: #252526;
+    font: 18px/23px "Open Sans",Helvetica,Arial,sans-serif;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+	border-bottom:1px solid #ccc;
+    text-decoration: none;
+	display: block;
+}
+.event_box ul li a span {
+	font: italic 14px/23px "Open Sans",Helvetica,Arial,sans-serif;
+	color: #999;
+}
+.event_box ul li a:hover{
+	color:#900;
+}
+table.eventcalender tr, table.eventcalender tr td{
+	position:relative;
+}
+table.eventcalender .weektitle th {
+	background:url(../images/date_bg.png) repeat-x left top;
+}
+table.eventcalender tr td a.addevent{
+	float:left;
+}
+table.eventcalender tr td a.addevent img{
+	margin:65px -90px 0 0;
+	
+}
+.addevent_box{
+	overflow:hidden;
+	margin:10px 0;
+}
+.addevent_box a.addevent {
+	float:right;
+	font: 14px/21px Helvetica, sans-serif;
+	background:#BD270F url(../images/event_add.png) no-repeat 10px center;
+	padding:3px 10px 3px 33px;
+	color:#fff;
+	text-decoration: none;
+	border-radius:5px;
+	-o-border-radius:5px;
+	-ms-border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+.addevent_box a.addevent:hover{
+	text-decoration:none;
+	background: #666666 url(../images/event_add.png) no-repeat 10px center;
+}
+.addevent_box a.addevent span{
+}
+#addevent, .event_box, .form_wrapper{
+	position:relative;
+}
+.form_wrapper{
+	margin-top:15px;
+}
+.form_wrapper p{
+	margin-bottom:10px;
+	color: #666666;
+}
+.form_wrapper label{
+	float:left;
+	width:120px;
+	color: #666666;
+}
+.form_wrapper input[type="text"]{
+	width:78%;
+	padding:5px 15px;
+	font: 14px Helvetica, sans-serif;
+}
+.form_wrapper input[type="text"].small{
+	width:206px;
+	margin:0 20px;
+}
+.wp-editor-container { 
+    font-family: "Open Sans",Helvetica,Arial,sans-serif !important; 
+	height:400px !important;
+}	
+.wp_themeSkin iframe{
+	height: 348px !important;
+}
+.wp-editor-container textarea.wp-editor-area{
+	resize:none;
+}
+.form_wrapper input[type="submit"]{
+    background: none repeat scroll 0 0 #303130;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 31px;
+    padding: 5px 8px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+	margin-top:20px;
+}
+table.yearname tr td a.commonTopRightLinks img{
+	float:right;
+}
+.error{
+	color:#FF0000;
+}
+.lumia_event_wrapper{
+	position:relative;
+}
+.ajax_loader{
+	display:none;
+	background:url(../images/spinnerlarge.gif) no-repeat center center;
+	width:100%;
+	height:100%;
+	position:absolute;
+}
+.event_content h3{
+	border-bottom:1px solid #ccc;
+	font:30px "Open Sans",Helvetica,Arial,sans-serif;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	text-align:center;
+}
+table.yearname tr td {
+	background:url(../images/month_bg.png) repeat-x left top;
+	line-height: 127px;
+}
+table.eventcalender tr td.cc-first {
+	background:url(../images/sun_bg.png) no-repeat left top;
+	color:#fff;
+}
+table.eventcalender tr td.cc-last {
+	background:url(../images/sat_bg.png) no-repeat left top;
+	color:#fff;
+}
+.month_name {
+	padding: 0 20px;
+}
+.prev {
+	float:left;
+}
+.next {
+	float:right;
+}
+.notification,
+.notification ul li {
+	margin-bottom:10px;
+}
+.notification ul li span {
+	font:18px/21px "Open Sans",Helvetica,Arial,sans-serif;
+	vertical-align:top;
+}
+.google_map iframe {
+	min-height:300px;
+}
+.event_wrapper h1 {
+	font:30px/27px "Open Sans",Helvetica,Arial,sans-serif;
+	border-bottom:1px solid #ccc;
+	margin-bottom:10px;
+	padding-bottom:10px;
+}
+.event-header-box {
+	position:relative;
+	padding: 0 15px;
+}
+.event-header-box .col-md-4 {
+    margin: 0;
+    min-height: 90px;
+    padding: 15px;
+}
+.box-event-info {
+    padding-left: 75px;
+    position: relative;
+}
+.event-header-box i {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 27px;
+    height: 60px;
+    left: 0;
+    line-height: 1em;
+    padding-top: 14px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 60px;
+}
+.box-event-info p,
+.box-event-info p a {
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.5em;
+    margin: 0;
+    padding-top: 7px;
+}
+.class1 {
+    background: #BE2137;
+}
+.class2 {
+    background: #E62937;
+}
+.class3 {
+    background: #FF7525;
+}
+.class4 {
+    background: #00752C;
+}
+.class5 {
+    background: #009E2F;
+}
+.class6 {
+    background: #00E430;
+}
+.class7 {
+    background: #0052AC;
+}
+.class8 {
+    background: #0079F1;
+}
+.class9 {
+    background: #00A9FF;
+}
+.content {
+    background: #484043;
+	padding: 10px 20px;
+	line-height:23px;
+	color:#fff;
+}
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+	table.yearname tr td {
+		line-height: 40px;
+	}
+	.month_name {
+		padding: 0 10px;
+	}
+	table.yearname tr td span#currmonthyear {
+		width: 58%;
+		font: 500 22px/40px "Open Sans",Helvetica,Arial,sans-serif;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today,
+	table.eventcalender tr td.eventday {
+		font: 600 18px/40px "Open Sans",Helvetica,Arial,sans
+	}
+	table.eventcalender tr th.daytitle {
+		font: 600 16px/40px "Open Sans",Helvetica,Arial,sans;
+		padding:0;
+	}
+	.addevent_box a.addevent {
+		float: left;
+	}
+	table.eventcalender tr td.eventday a ,
+	table.eventcalender tr td.today span{
+		background-position: 0 -35px;
+	}
+	.event_content h3{
+		font-size:16px;
+	}
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+	table.yearname tr td span#currmonthyear {
+		width: 82%;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today  {
+		line-height:135px;
+	}
+	.lumia_event_wrapper .col-md-6 {
+		width:49%;
+		display: inline-block;
+	}
+	.addevent_box a.addevent {
+		float: right;
+	}
+	.event_content h3{
+		font-size:22px;
+	}
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 360px) {
+	table.yearname tr td {
+		line-height: 40px;
+	}
+	.month_name {
+		padding: 0 10px;
+	}
+	table.yearname tr td span#currmonthyear {
+		width: 64%;
+		font: 500 24px/40px "Open Sans",Helvetica,Arial,sans-serif;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today  {
+		font: 600 18px/40px "Open Sans",Helvetica,Arial,sans
+	}
+	table.eventcalender tr th.daytitle {
+		font: 600 16px/40px "Open Sans",Helvetica,Arial,sans;
+		padding:0;
+	}
+	.addevent_box a.addevent {
+		float: left;
+	}
+	.event_content h3{
+		font-size:16px;
+	}
+}
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 640px) {
+	table.yearname tr td {
+		line-height: 80px;
+	}
+	.month_name {
+		padding: 0 10px;
+	}
+	table.yearname tr td span#currmonthyear {
+		width: 81%;
+		font: 500 40px/80px "Open Sans",Helvetica,Arial,sans-serif;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today  {
+		font: 600 28px/75px "Open Sans",Helvetica,Arial,sans
+	}
+	table.eventcalender tr th.daytitle {
+		font: 600 26px/50px "Open Sans",Helvetica,Arial,sans;
+		padding:0;
+	}
+	.lumia_event_wrapper .col-md-6 {
+		width:49%;
+		display: inline-block;
+	}
+	.addevent_box a.addevent {
+		float: right;
+	}
+	table.eventcalender tr td.eventday a ,
+	table.eventcalender tr td.today span{
+		background-position: 0 -15px;
+	}
+	table.eventcalender tr td.eventday {
+		font: 600 28px/75px "Open Sans",Helvetica,Arial,sans
+	}
+	.event_content h3{
+		font-size:22px;
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+	table.yearname tr td span#currmonthyear {
+		width: 78%;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today  {
+		line-height:100px;
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 1024px) {
+	table.yearname tr td span#currmonthyear {
+		width: 82%;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today  {
+		line-height:135px;
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 980px) and (max-width : 1200px) {
+	table.yearname tr td {
+		line-height: 127px;
+	}
+	table.yearname tr td span#currmonthyear {
+		width: 82%;
+		font: 500 60px/127px "Open Sans",Helvetica,Arial,sans-serif
+	}
+	.month_name {
+		padding: 0 20px;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today,
+	table.eventcalender tr td.eventday {
+		font: 600 50px/135px "Open Sans",Helvetica,Arial,sans-serif;
+	}
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+	table.yearname tr td {
+		line-height: 127px;
+	}
+	table.yearname tr td span#currmonthyear {
+		width: 82%;
+		font: 500 60px/127px "Open Sans",Helvetica,Arial,sans-serif
+	}
+	.month_name {
+		padding: 0 20px;
+	}
+	table.eventcalender tr td.ecday, 
+	table.eventcalender tr td.eventdaytable.eventcalender tr td.today,
+	table.eventcalender tr td.today,
+	table.eventcalender tr td.eventday {
+		font: 600 50px/135px "Open Sans",Helvetica,Arial,sans-serif;
+	}	
+}
